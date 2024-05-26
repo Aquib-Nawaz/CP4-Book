@@ -4,6 +4,23 @@
 #include <iostream>
 #include<cstring>
 using namespace std;
+
+void target_finder(int al, int i, int j, const int ai[], const int aj[], char C[][8], bool f){
+    for(int k=0;k<al;k++){
+        int ti=i,tj=j;
+        while(true){
+            ti+=ai[k],tj+=aj[k];
+            if(ti>=0&&ti<8&&tj>=0&&tj<8&&(C[ti][tj]==' '||C[ti][tj]=='x')) {
+                C[ti][tj] = 'x';
+            }
+            else
+                break;
+            if(f)
+                break;
+        }
+    }
+}
+
 int main(){
     char C[8][8];
     int di [] = {1,-1,1,-1}, dj [] = {1,1,-1,-1};
@@ -36,63 +53,21 @@ int main(){
         for(int i=0;i<8;i++){
             for(int j=0;j<8;j++){
                 if(C[i][j]=='q'||C[i][j]=='b'||C[i][j]=='k'){
-                    for(int k=0;k<4;k++){
-                        int ti=i,tj=j;
-                         while(true){
-                             ti+=di[k],tj+=dj[k];
-                             if(ti>=0&&ti<8&&tj>=0&&tj<8&&(C[ti][tj]==' '||C[ti][tj]=='x')) {
-                                 C[ti][tj] = 'x';
-                             }
-                             else
-                                break;
-                             if(C[i][j]=='k')
-                                break;
-                         }
-                    }
+                    target_finder(4,i,j,di,dj,C,C[i][j]=='k');
                 }
                 if(C[i][j]=='q'||C[i][j]=='r'||C[i][j]=='k'){
-                    for(int k=0;k<4;k++){
-                        int ti=i,tj=j;
-                        while(true){
-                            ti+=hi[k],tj+=hj[k];
-                            if(ti>=0&&ti<8&&tj>=0&&tj<8&&(C[ti][tj]==' '||C[ti][tj]=='x')) {
-                                C[ti][tj] = 'x';
-                            }
-                            else
-                                break;
-                            if(C[i][j]=='k')
-                                break;
-                        }
-                    }
+                    target_finder(4,i,j,hi,hj,C,C[i][j]=='k');
                 }
 
                 if(C[i][j]=='n'){
-                    for(int k=0;k<8;k++){
-                        int ti=i,tj=j;
-                        ti+=ni[k],tj+=nj[k];
-                        if(ti>=0&&ti<8&&tj>=0&&tj<8&&C[ti][tj]==' ') {
-                            C[ti][tj] = 'x';
-                        }
-                    }
+                    target_finder(8,i,j,ni,nj,C, true);
                 }
 
                 if(C[i][j]=='p'){
-                    for(int k=0;k<2;k++){
-                        int ti=i,tj=j;
-                        ti+=pi[k],tj+=pj[k];
-                        if(ti>=0&&ti<8&&tj>=0&&tj<8&&C[ti][tj]==' ') {
-                            C[ti][tj] = 'x';
-                        }
-                    }
+                    target_finder(2,i,j,pi,pj,C, true);
                 }
                 if(C[i][j]=='P'){
-                    for(int k=0;k<2;k++){
-                        int ti=i,tj=j;
-                        ti+=Pi[k],tj+=Pj[k];
-                        if(ti>=0&&ti<8&&tj>=0&&tj<8&&C[ti][tj]==' ') {
-                            C[ti][tj] = 'x';
-                        }
-                    }
+                    target_finder(2,i,j,Pi,Pj,C, true);
                 }
             }
 
