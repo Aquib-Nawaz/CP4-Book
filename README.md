@@ -1,4 +1,4 @@
-## Solution for starred exercise from Competitve Programming 4 book 1 by steven and felix halim
+## Solution for starred exercise from Competitve Programming 4 book 1 by Steven and Felix Halim
 
 It contains Chapter 1-4 currently. Part 2 codes will be added إِنْ شَاءَٱللَّٰهُ .
 
